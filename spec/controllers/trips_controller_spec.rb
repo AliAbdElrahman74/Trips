@@ -29,11 +29,15 @@ RSpec.describe TripsController, type: :controller do
   # Trip. As you add validations to Trip, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      :status => "ongoing"
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      :status => nil
+    }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -57,20 +61,7 @@ RSpec.describe TripsController, type: :controller do
     end
   end
 
-  describe "GET #new" do
-    it "returns a success response" do
-      get :new, {}, valid_session
-      expect(response).to be_success
-    end
-  end
 
-  describe "GET #edit" do
-    it "returns a success response" do
-      trip = Trip.create! valid_attributes
-      get :edit, {:id => trip.to_param}, valid_session
-      expect(response).to be_success
-    end
-  end
 
   describe "POST #create" do
     context "with valid params" do
@@ -78,11 +69,6 @@ RSpec.describe TripsController, type: :controller do
         expect {
           post :create, {:trip => valid_attributes}, valid_session
         }.to change(Trip, :count).by(1)
-      end
-
-      it "redirects to the created trip" do
-        post :create, {:trip => valid_attributes}, valid_session
-        expect(response).to redirect_to(Trip.last)
       end
     end
 
@@ -97,20 +83,16 @@ RSpec.describe TripsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          :status => "completed"
+        }
       }
 
       it "updates the requested trip" do
         trip = Trip.create! valid_attributes
         put :update, {:id => trip.to_param, :trip => new_attributes}, valid_session
         trip.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "redirects to the trip" do
-        trip = Trip.create! valid_attributes
-        put :update, {:id => trip.to_param, :trip => valid_attributes}, valid_session
-        expect(response).to redirect_to(trip)
+        expect(Trip.last.status).to eq("completed")
       end
     end
 
@@ -129,12 +111,6 @@ RSpec.describe TripsController, type: :controller do
       expect {
         delete :destroy, {:id => trip.to_param}, valid_session
       }.to change(Trip, :count).by(-1)
-    end
-
-    it "redirects to the trips list" do
-      trip = Trip.create! valid_attributes
-      delete :destroy, {:id => trip.to_param}, valid_session
-      expect(response).to redirect_to(trips_url)
     end
   end
 

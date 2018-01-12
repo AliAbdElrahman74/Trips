@@ -29,11 +29,21 @@ RSpec.describe LocationsController, type: :controller do
   # Location. As you add validations to Location, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      :name => "Duki",
+      :lat => "30.1477° N",
+      :long => "68.5843° E",
+      :trip_id => 1
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      :name => "Duki",
+      :lat => "",
+      :long => "",
+      :trip_id => nil
+    }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -57,32 +67,12 @@ RSpec.describe LocationsController, type: :controller do
     end
   end
 
-  describe "GET #new" do
-    it "returns a success response" do
-      get :new, {}, valid_session
-      expect(response).to be_success
-    end
-  end
-
-  describe "GET #edit" do
-    it "returns a success response" do
-      location = Location.create! valid_attributes
-      get :edit, {:id => location.to_param}, valid_session
-      expect(response).to be_success
-    end
-  end
-
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Location" do
         expect {
           post :create, {:location => valid_attributes}, valid_session
         }.to change(Location, :count).by(1)
-      end
-
-      it "redirects to the created location" do
-        post :create, {:location => valid_attributes}, valid_session
-        expect(response).to redirect_to(Location.last)
       end
     end
 
@@ -97,21 +87,21 @@ RSpec.describe LocationsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          :name => "Giza",
+          :lat => "30.1477° N",
+          :long => "68.5843° E",
+          :trip_id => 1
+        }
       }
 
       it "updates the requested location" do
         location = Location.create! valid_attributes
         put :update, {:id => location.to_param, :location => new_attributes}, valid_session
         location.reload
-        skip("Add assertions for updated state")
+        expect(Location.last.name).to eq("Giza")
       end
 
-      it "redirects to the location" do
-        location = Location.create! valid_attributes
-        put :update, {:id => location.to_param, :location => valid_attributes}, valid_session
-        expect(response).to redirect_to(location)
-      end
     end
 
     context "with invalid params" do
@@ -131,11 +121,6 @@ RSpec.describe LocationsController, type: :controller do
       }.to change(Location, :count).by(-1)
     end
 
-    it "redirects to the locations list" do
-      location = Location.create! valid_attributes
-      delete :destroy, {:id => location.to_param}, valid_session
-      expect(response).to redirect_to(locations_url)
-    end
   end
 
 end
