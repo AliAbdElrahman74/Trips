@@ -1,0 +1,13 @@
+class CreateLocations < ActiveRecord::Migration
+  def change
+    create_table :locations do |t|
+      t.string :name
+      t.string :lat
+      t.string :long
+      t.integer :trip_id
+
+      t.timestamps null: false
+    end
+    add_index :locations, :trip_id
+  end
+end

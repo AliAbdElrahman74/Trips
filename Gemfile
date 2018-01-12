@@ -15,11 +15,9 @@ gem 'active_model_serializers', '~> 0.10.2'
 group :development, :test do
   gem 'rspec-rails', '~> 3.6'
   gem 'factory_bot_rails'
-end
-
-group :test do
   gem 'shoulda-matchers', '~> 3.1'
 end
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
