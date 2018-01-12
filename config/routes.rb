@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   scope 'api' do
     resources :trips, except: [:new, :edit]
+    resources :locations, except: [:new, :edit]
   end
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
