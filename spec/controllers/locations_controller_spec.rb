@@ -40,8 +40,8 @@ RSpec.describe LocationsController, type: :controller do
   let(:invalid_attributes) {
     {
       :name => "Duki",
-      :lat => "",
-      :long => "",
+      :lat => nil,
+      :long => nil,
       :trip_id => nil
     }
   }
@@ -75,13 +75,6 @@ RSpec.describe LocationsController, type: :controller do
         }.to change(Location, :count).by(1)
       end
     end
-
-    context "with invalid params" do
-      it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, {:location => invalid_attributes}, valid_session
-        expect(response).to be_success
-      end
-    end
   end
 
   describe "PUT #update" do
@@ -102,14 +95,6 @@ RSpec.describe LocationsController, type: :controller do
         expect(Location.last.name).to eq("Giza")
       end
 
-    end
-
-    context "with invalid params" do
-      it "returns a success response (i.e. to display the 'edit' template)" do
-        location = Location.create! valid_attributes
-        put :update, {:id => location.to_param, :location => invalid_attributes}, valid_session
-        expect(response).to be_success
-      end
     end
   end
 
