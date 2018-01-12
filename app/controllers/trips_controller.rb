@@ -1,6 +1,5 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :update, :destroy]
-
   # GET /trips
   # GET /trips.json
   def index
@@ -54,4 +53,5 @@ class TripsController < ApplicationController
     def trip_params
       params.require(:trip).permit(:status)
     end
+
 end
