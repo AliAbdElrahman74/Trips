@@ -1,6 +1,8 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+  mount Sidekiq::Web, at: '/sidekiq'
 
   scope 'api' do
     resources :trips, except: [:new, :edit]

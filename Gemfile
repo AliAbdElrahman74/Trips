@@ -18,6 +18,10 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 3.1'
 end
 
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
