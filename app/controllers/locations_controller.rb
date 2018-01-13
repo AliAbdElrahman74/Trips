@@ -18,12 +18,10 @@ class LocationsController < ApplicationController
   # POST /locations
   # POST /locations.json
   def create
-    @location = Location.new(location_params)
-
-    if @location.save
-      render json: @location, status: :created, location: @location
+    if AddLocationWorker.perform_async(location_params)
+      render json: {}, status: 200
     else
-      render json: @location.errors, status: :unprocessable_entity
+      render json: {}, status: :unprocessable_entity
     end
   end
 
